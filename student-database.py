@@ -1,58 +1,42 @@
-print('''Welcome to student Data base
-         1.Get user detail by roll number
-         2.Get user detail by first name
-         3.Get user detail by email address
-         4.Delete user detail by roll number
-         5.Show all user
-         6.Update user detail by roll number
-         7.Delete user detail by roll number
-         8.Find user siblings by father name
-         9.Sort user detail by last name
-         10.Sort user detail by roll number
-         11.Validate user inputs
+class student:
+    def __init__(self, rollno, firstname, lastname, email, dob, fathername):
+        self.rollno = rollno
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
+        self.dob = dob
+        self.fathername = fathername
 
-         ''')
+    def display(self):
+        print(self, rollno, end='\t\t')
+        print(self, firstname, end='\t\t')
+        print(self, lastname, end='\t\t')
+        print(self, email, end='\t\t')
+        print(self, dob, end='\t\t')
+        print(self, fathername)
 
-student1 = input(str("Enter the details: "))
 
-if student1 == 'IN001':
-    print(rahul)
-elif student1 == 'rahul':
-    print(rahul)
-elif student1 == 'singh':
-    print(rahul)
-if student1 == 'IN002':
-    print(dave)
-elif student1 == 'dave':
-    print(dave)
-elif student1 == 'smith':
-    print(dave)
-if student1 == 'IN003':
-    print(ava)
-elif student1 == 'ava':
-    print(ava)
-elif student1 == 'smith':
-    print(ava)
+st = list()
+n = int(input('enter no. of students : '))
+print('students details entry...')
+for i in range(n):
+    print('student : ', i + 1)
+    rollno = input('\t rollno : ')
+    firstname = input('\t firstname : ')
+    lastname = input('\t lastname : ')
+    email = input('\t email : ')
+    dob = input('\t dob : ')
+    fathername = input('\t fathername : ')
+    st.append(student(rollno, firstname, lastname, email, dob, fathername))
 
-    rahul = {
-        'first_name': 'rahul',
-        'last_name': 'singh',
-        'father_name': 'shyam singh',
-        'date_of_birth': '1993',
-        'email_address': 'rahul@in.com',
-        'roll_number': 'IN001'}
+for i in range(n):
+    for j in range(i + 1, n):
+        if (st[i].rollno > st[j].rollno):
+            tmp = st[i]
+            st[i] = st[j]
+            st[j] = tmp
 
-    dave = {
-        'first_name': 'dave',
-        'last_name': 'smith',
-        'father_name': 'john smith',
-        'date_of_birth': '1990',
-        'email_address': 'dave@in.com',
-        'roll_number': 'IN002'}
-    ava = {
-        'first_name': 'ava',
-        'last_name': 'smith',
-        'father_name': 'john smith',
-        'date_of_birth': '1992',
-        'email_address': 'ava@in.com',
-        'roll_number': 'IN003'}
+print('student information')
+print('rollno\t\tfirstname\t\tlastname\t\temail\t\tdob\t\tfathername')
+for i in range(n):
+    st[i].display()
