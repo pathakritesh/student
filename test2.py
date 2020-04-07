@@ -78,6 +78,6 @@ if __name__ == '__main__':
                 st_list[i] = st_list[j]
                 st_list[j] = tmp
     print('student information')
-    print('rollno\t\tfirstname\t\tlastname\t\tfathername\t\tdob\t\temail')
+    print('rollno\tfirstname\t\tlastname\t\tfathername\t\tdob\t\temail')
     for i in range(n):
         st_list[i].display()
