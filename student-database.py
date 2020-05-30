@@ -1,42 +1,165 @@
 class student:
-    def __init__(self, rollno, firstname, lastname, email, dob, fathername):
+    def __init__(self, rollno, firstname, lastname, fathername, dob, email):
         self.rollno = rollno
         self.firstname = firstname
         self.lastname = lastname
-        self.email = email
-        self.dob = dob
         self.fathername = fathername
+        self.dob = dob
+        self.email = email
 
     def display(self):
-        print(self, rollno, end='\t\t')
-        print(self, firstname, end='\t\t')
-        print(self, lastname, end='\t\t')
-        print(self, email, end='\t\t')
-        print(self, dob, end='\t\t')
-        print(self, fathername)
+        print(self.rollno, end='\t\t')
+        print(self.firstname, end='\t\t')
+        print(self.lastname, end='\t\t')
+        print(self.fathername, end='\t\t')
+        print(self.dob, end='\t\t')
+        print(self.email)
 
 
-st = list()
-n = int(input('enter no. of students : '))
-print('students details entry...')
-for i in range(n):
-    print('student : ', i + 1)
-    rollno = input('\t rollno : ')
-    firstname = input('\t firstname : ')
-    lastname = input('\t lastname : ')
-    email = input('\t email : ')
-    dob = input('\t dob : ')
-    fathername = input('\t fathername : ')
-    st.append(student(rollno, firstname, lastname, email, dob, fathername))
+st_list = []
 
-for i in range(n):
-    for j in range(i + 1, n):
-        if (st[i].rollno > st[j].rollno):
-            tmp = st[i]
-            st[i] = st[j]
-            st[j] = tmp
 
-print('student information')
-print('rollno\t\tfirstname\t\tlastname\t\temail\t\tdob\t\tfathername')
-for i in range(n):
-    st[i].display()
+def add_student(student):
+    st_list.append(student)
+
+
+def get_all_student():
+    return st_list
+
+
+def print_all_data():
+    local_std_lst = get_all_student()
+    for item in local_std_lst:
+        item.display()
+
+
+def search_by_first_name(first_name):
+    get_list1 = get_all_student()
+    for item in get_list1:
+        if item.firstname == first_name:
+            return item
+
+
+def search_by_rollno(roll_no):
+    get_list1 = get_all_student()
+    for item in get_list1:
+        if item.rollno == roll_no:
+            return item
+
+
+def search_by_email(email_id):
+    get_list1 = get_all_student()
+    for item in get_list1:
+        if item.email == email_id:
+            return item
+
+
+def del_by_email(email_id):
+    get_list1 = get_all_student()
+    for item in get_list1:
+        if item.email == email_id:
+            return get_list1.remove(item)
+
+
+def del_by_firstname(first_name):
+    get_list1 = get_all_student()
+    for item in get_list1:
+        if item.firstname == first_name:
+            return get_list1.remove(item)
+
+
+def get_siblings():
+    lib1 = {}
+    lib2 = {}
+    for item in st_list:
+        if item.fathername not in lib1:
+            list1 = [item]
+            lib1[item.fathername] = list1
+        else:
+            lib1[item.fathername].append(item)
+    for mapKey in lib1:
+        if len(lib1[mapKey]) > 1:
+            lib2[mapKey] = lib1[mapKey]
+    return lib2
+
+
+def user_input():
+    rollno = input('enter rollno: ')
+    firstname = input('enter firstname: ')
+    lastname = input('enter lastname: ')
+    fathername = input('enter fathername: ')
+    dob = input('enter dob: ')
+    email = input('enter email: ')
+    iserror = False
+
+    if len(rollno) > 8:
+        print('invalid rollno ')
+        iserror = True
+
+    if len(firstname) > 50:
+        print('invalid firstname ')
+        iserror = True
+
+    if len(lastname) > 50:
+        print('invalid lastname')
+        iserror = True
+
+    if len(fathername) > 100:
+        print('invalid fathername')
+        iserror = True
+
+    if len(dob) > 8:
+        print('invalid dob')
+        iserror = True
+
+    if len(email) > 250:
+        print('invalid email')
+        iserror = True
+
+    if iserror == False:
+        add_student(student(rollno, firstname, lastname, fathername, dob, email))
+
+
+if __name__ == '__main__':
+    add_student(student(1, 'eva1', 'john1', 'smith', 1993, 'in1@com'))
+    add_student(student(2, 'eva2', 'john2', 'smith', 1993, 'in2@com'))
+    add_student(student(3, 'eva3', 'ramesh', 'smith3', 1994, 'in3@com'))
+    add_student(student(4, 'eva4', 'joginder', 'smith4', 1995, 'in4@com'))
+    add_student(student(5, 'eva5', 'ramkishan', 'smith5', 1996, 'in5@com'))
+
+    student1 = search_by_first_name('eva3')
+    student1.display()
+    student2 = search_by_rollno(1)
+    student2.display()
+    student3 = search_by_email('in4@com')
+    student3.display()
+    del_by_firstname('eva2')
+    del_by_email('in1@com')
+    user_input()
+    print_all_data()
+
+    n = int(input('enter no. of students for sort by rollno : '))
+    for i in range(n):
+        for j in range(i + 1, n):
+            if st_list[i].rollno > st_list[j].rollno:
+                tmp = st_list[i]
+                st_list[i] = st_list[j]
+                st_list[j] = tmp
+    for i in range(n):
+        st_list[i].display()
+
+    n = int(input('enter no. of students for sort by lastname: '))
+    for i in range(n):
+        for j in range(i + 1, n):
+            if st_list[i].lastname > st_list[j].lastname:
+                tmp = st_list[i]
+                st_list[i] = st_list[j]
+                st_list[j] = tmp
+    for i in range(n):
+        st_list[i].display()
+
+    lib1 = get_siblings()
+    for Key in lib1:
+        print('father name', Key)
+        for item in lib1[Key]:
+            print('student first name', item.firstname)
