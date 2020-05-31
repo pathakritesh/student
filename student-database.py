@@ -147,7 +147,7 @@ if __name__ == '__main__':
 
 
     def rerun():
-        x = int(input("""enter number to get details below 
+        x = str(input("""enter number to get details below 
             1. get user by first name     
             2. get user details by roll number    
             3. get user by email               
@@ -162,31 +162,31 @@ if __name__ == '__main__':
 
             Enter Number to Get Details: """))
 
-        if x == 1:
+        if x == '1':
             m = input('enter first name: ')
             student1 = search_by_first_name(m)
             student1.display()
 
-        elif x == 2:
+        elif x == '2':
             n = input('enter rollno: ')
             student2 = search_by_rollno(n)
             student2.display()
-        elif x == 3:
+        elif x == '3':
             p = input('enter email')
             student3 = search_by_email(p)
             student3.display()
-        elif x == 4:
+        elif x == '4':
             print_all_data()
-        elif x == 5:
+        elif x == '5':
             f = input('enter rollno')
             del_by_rollno(f)
-        elif x == 6:
+        elif x == '6':
             g = input('enter email')
             del_by_email(g)
-        elif x == 7:
+        elif x == '7':
             user_input()
 
-        elif x == 8:
+        elif x == '8':
             n = len(st_list)
             for i in range(n):
                 for j in range(i + 1, n):
@@ -197,7 +197,7 @@ if __name__ == '__main__':
             for i in range(n):
                 st_list[i].display()
 
-        elif x == 9:
+        elif x == '9':
             n = len(st_list)
             for i in range(n):
                 for j in range(i + 1, n):
@@ -208,15 +208,13 @@ if __name__ == '__main__':
             for i in range(n):
                 st_list[i].display()
 
-        elif x == 10:
+        elif x == '10':
             lib1 = get_siblings()
             for Key in lib1:
                 print('father name', Key)
                 for item in lib1[Key]:
                     print('student first name', item.firstname)
 
-        elif x == 0:
-            again()
         else:
             print('Wrong Entry Please enter within limit')
         again()
