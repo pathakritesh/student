@@ -61,10 +61,10 @@ def del_by_email(email_id):
             return get_list1.remove(item)
 
 
-def del_by_firstname(first_name):
+def del_by_rollno(roll_no):
     get_list1 = get_all_student()
     for item in get_list1:
-        if item.firstname == first_name:
+        if item.rollno == roll_no:
             return get_list1.remove(item)
 
 
@@ -126,40 +126,64 @@ if __name__ == '__main__':
     add_student(student(3, 'eva3', 'ramesh', 'smith3', 1994, 'in3@com'))
     add_student(student(4, 'eva4', 'joginder', 'smith4', 1995, 'in4@com'))
     add_student(student(5, 'eva5', 'ramkishan', 'smith5', 1996, 'in5@com'))
+    x = int(input("""enter number to get details below 
+    1. get user by first name     
+    2. get user details by roll number    
+    3. get user by email               
+    4. show all user
+    5. delete user by roll number      
+    6. delete user by email address    
+    7. validate user inputs 
+    8. sort details by student last name   
+    9. sort student by roll number
+    10. find brother if they in same collage 
+    11. update user information by roll number 
+    
+    Enter Number to Get Details: """))
 
-    student1 = search_by_first_name('eva3')
-    student1.display()
-    student2 = search_by_rollno(1)
-    student2.display()
-    student3 = search_by_email('in4@com')
-    student3.display()
-    del_by_firstname('eva2')
-    del_by_email('in1@com')
-    user_input()
-    print_all_data()
+    if x== 1:
+        student1 = search_by_first_name('eva3')
+        student1.display()
+    if x== 2:
+        student2 = search_by_rollno(1)
+        student2.display()
+    if x== 3:
+        student3 = search_by_email('in4@com')
+        student3.display()
+    if x == 4:
+        print_all_data()
+    if x == 5:
+        del_by_rollno(2)
+    if x == 6:
+        del_by_email('in1@com')
+    if x == 7:
+        user_input()
 
-    n = int(input('enter no. of students for sort by rollno : '))
-    for i in range(n):
-        for j in range(i + 1, n):
-            if st_list[i].rollno > st_list[j].rollno:
-                tmp = st_list[i]
-                st_list[i] = st_list[j]
-                st_list[j] = tmp
-    for i in range(n):
-        st_list[i].display()
+    if x == 8:
+        n = len(st_list)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if st_list[i].rollno > st_list[j].rollno:
+                    tmp = st_list[i]
+                    st_list[i] = st_list[j]
+                    st_list[j] = tmp
+        for i in range(n):
+            st_list[i].display()
 
-    n = int(input('enter no. of students for sort by lastname: '))
-    for i in range(n):
-        for j in range(i + 1, n):
-            if st_list[i].lastname > st_list[j].lastname:
-                tmp = st_list[i]
-                st_list[i] = st_list[j]
-                st_list[j] = tmp
-    for i in range(n):
-        st_list[i].display()
+    if x == 9:
+        n = len(st_list)
+        for i in range(n):
+            for j in range(i + 1, n):
+                if st_list[i].lastname > st_list[j].lastname:
+                    tmp = st_list[i]
+                    st_list[i] = st_list[j]
+                    st_list[j] = tmp
+        for i in range(n):
+            st_list[i].display()
 
-    lib1 = get_siblings()
-    for Key in lib1:
-        print('father name', Key)
-        for item in lib1[Key]:
-            print('student first name', item.firstname)
+    if x == 10:
+        lib1 = get_siblings()
+        for Key in lib1:
+            print('father name', Key)
+            for item in lib1[Key]:
+                print('student first name', item.firstname)
