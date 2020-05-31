@@ -84,16 +84,16 @@ def get_siblings():
 
 
 def user_input():
-    rollno = input('enter rollno: ')
-    firstname = input('enter firstname: ')
-    lastname = input('enter lastname: ')
-    fathername = input('enter fathername: ')
-    dob = input('enter dob: ')
-    email = input('enter email: ')
+    rollno = str(input('enter rollno: '))
+    firstname = str(input('enter firstname: '))
+    lastname = str(input('enter lastname: '))
+    fathername = str(input('enter fathername: '))
+    dob = str(input('enter dob: '))
+    email = str(input('enter email: '))
     iserror = False
 
     if len(rollno) > 8:
-        print('invalid rollno ')
+        print('invalid rollno character more than 8')
         iserror = True
 
     if len(firstname) > 50:
@@ -109,7 +109,7 @@ def user_input():
         iserror = True
 
     if len(dob) > 8:
-        print('invalid dob')
+        print('invalid dob character more than 8 digit')
         iserror = True
 
     if len(email) > 250:
@@ -120,70 +120,99 @@ def user_input():
         add_student(student(rollno, firstname, lastname, fathername, dob, email))
 
 
+def again():
+    run_again = input("""enter 'y' for run again
+    the application and 'n' for quit: """)
+    if run_again.lower() == 'y':
+        rerun()
+
+    elif run_again.lower() == 'n':
+        print('See you later.')
+    else:
+        again()
+    return run_again
+
+
 if __name__ == '__main__':
-    add_student(student(1, 'eva1', 'john1', 'smith', 1993, 'in1@com'))
-    add_student(student(2, 'eva2', 'john2', 'smith', 1993, 'in2@com'))
-    add_student(student(3, 'eva3', 'ramesh', 'smith3', 1994, 'in3@com'))
-    add_student(student(4, 'eva4', 'joginder', 'smith4', 1995, 'in4@com'))
-    add_student(student(5, 'eva5', 'ramkishan', 'smith5', 1996, 'in5@com'))
-    x = int(input("""enter number to get details below 
-    1. get user by first name     
-    2. get user details by roll number    
-    3. get user by email               
-    4. show all user
-    5. delete user by roll number      
-    6. delete user by email address    
-    7. validate user inputs 
-    8. sort details by student last name   
-    9. sort student by roll number
-    10. find brother if they in same collage 
-    11. update user information by roll number 
-    
-    Enter Number to Get Details: """))
+    add_student(student('1', 'eva1', 'john1', 'smith', '1993', 'in1@com'))
+    add_student(student('2', 'eva2', 'john2', 'smith', '1993', 'in2@com'))
+    add_student(student('3', 'eva3', 'ramesh', 'smith3', '1994', 'in3@com'))
+    add_student(student('4', 'eva4', 'joginder', 'smith4', '1995', 'in4@com'))
+    add_student(student('5', 'eva5', 'ramkishan', 'smith5', '1996', 'in5@com'))
 
-    if x== 1:
-        student1 = search_by_first_name('eva3')
-        student1.display()
-    if x== 2:
-        student2 = search_by_rollno(1)
-        student2.display()
-    if x== 3:
-        student3 = search_by_email('in4@com')
-        student3.display()
-    if x == 4:
-        print_all_data()
-    if x == 5:
-        del_by_rollno(2)
-    if x == 6:
-        del_by_email('in1@com')
-    if x == 7:
-        user_input()
 
-    if x == 8:
-        n = len(st_list)
-        for i in range(n):
-            for j in range(i + 1, n):
-                if st_list[i].rollno > st_list[j].rollno:
-                    tmp = st_list[i]
-                    st_list[i] = st_list[j]
-                    st_list[j] = tmp
-        for i in range(n):
-            st_list[i].display()
 
-    if x == 9:
-        n = len(st_list)
-        for i in range(n):
-            for j in range(i + 1, n):
-                if st_list[i].lastname > st_list[j].lastname:
-                    tmp = st_list[i]
-                    st_list[i] = st_list[j]
-                    st_list[j] = tmp
-        for i in range(n):
-            st_list[i].display()
+    def rerun():
+        x = int(input("""enter number to get details below 
+            1. get user by first name     
+            2. get user details by roll number    
+            3. get user by email               
+            4. show all user
+            5. delete user by roll number      
+            6. delete user by email address    
+            7. validate user inputs 
+            8. sort details by student last name   
+            9. sort student by roll number
+            10. find brother if they in same collage 
+            11. update user information by roll number 
 
-    if x == 10:
-        lib1 = get_siblings()
-        for Key in lib1:
-            print('father name', Key)
-            for item in lib1[Key]:
-                print('student first name', item.firstname)
+            Enter Number to Get Details: """))
+
+        if x == 1:
+            m = input('enter first name: ')
+            student1 = search_by_first_name(m)
+            student1.display()
+        elif x == 2:
+            n = input('enter rollno: ')
+            student2 = search_by_rollno(n)
+            student2.display()
+        elif x == 3:
+            p = input('enter email')
+            student3 = search_by_email(p)
+            student3.display()
+        elif x == 4:
+            print_all_data()
+        elif x == 5:
+            f = input('enter rollno')
+            del_by_rollno(f)
+        elif x == 6:
+            g = input('enter email')
+            del_by_email(g)
+        elif x == 7:
+            user_input()
+
+        elif x == 8:
+            n = len(st_list)
+            for i in range(n):
+                for j in range(i + 1, n):
+                    if st_list[i].rollno > st_list[j].rollno:
+                        tmp = st_list[i]
+                        st_list[i] = st_list[j]
+                        st_list[j] = tmp
+            for i in range(n):
+                st_list[i].display()
+
+        elif x == 9:
+            n = len(st_list)
+            for i in range(n):
+                for j in range(i + 1, n):
+                    if st_list[i].lastname > st_list[j].lastname:
+                        tmp = st_list[i]
+                        st_list[i] = st_list[j]
+                        st_list[j] = tmp
+            for i in range(n):
+                st_list[i].display()
+
+        elif x == 10:
+            lib1 = get_siblings()
+            for Key in lib1:
+                print('father name', Key)
+                for item in lib1[Key]:
+                    print('student first name', item.firstname)
+
+        elif x == 0:
+            again()
+        else:
+            print('Wrong Entry Please enter within limit')
+        again()
+    rerun()
