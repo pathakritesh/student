@@ -38,6 +38,7 @@ def search_by_first_name(first_name):
     for item in get_list1:
         if item.firstname == first_name:
             return item
+    rerun()
 
 
 def search_by_rollno(roll_no):
@@ -45,6 +46,7 @@ def search_by_rollno(roll_no):
     for item in get_list1:
         if item.rollno == roll_no:
             return item
+    rerun()
 
 
 def search_by_email(email_id):
@@ -52,6 +54,7 @@ def search_by_email(email_id):
     for item in get_list1:
         if item.email == email_id:
             return item
+    rerun()
 
 
 def del_by_email(email_id):
@@ -59,6 +62,7 @@ def del_by_email(email_id):
     for item in get_list1:
         if item.email == email_id:
             return get_list1.remove(item)
+    rerun()
 
 
 def del_by_rollno(roll_no):
@@ -66,6 +70,7 @@ def del_by_rollno(roll_no):
     for item in get_list1:
         if item.rollno == roll_no:
             return get_list1.remove(item)
+    rerun()
 
 
 def get_siblings():
@@ -130,7 +135,6 @@ def again():
         print('See you later.')
     else:
         again()
-    return run_again
 
 
 if __name__ == '__main__':
@@ -162,6 +166,7 @@ if __name__ == '__main__':
             m = input('enter first name: ')
             student1 = search_by_first_name(m)
             student1.display()
+
         elif x == 2:
             n = input('enter rollno: ')
             student2 = search_by_rollno(n)
