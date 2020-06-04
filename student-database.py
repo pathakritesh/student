@@ -95,6 +95,8 @@ def user_input():
     fathername = str(input('enter fathername: '))
     dob = str(input('enter dob: '))
     email = str(input('enter email: '))
+    print(f"Entered information: Roll No:{rollno}, First Name:{firstname}",
+           f" Last Name:{lastname}, Father Name:{fathername}, Date of birth:{dob}, Email Address:{email}")
     iserror = False
 
     if len(rollno) > 8:
@@ -126,8 +128,7 @@ def user_input():
 
 
 def again():
-    run_again = input("""enter 'y' for run again
-    the application and 'n' for quit: """)
+    run_again = input("""enter 'y' for run again the application and 'n' for quit: """)
     if run_again.lower() == 'y':
         rerun()
 
@@ -135,6 +136,57 @@ def again():
         print('See you later.')
     else:
         again()
+
+
+def update_user_by_roll(rollNo, stdObj):
+    counter = 0
+    for item in st_list:
+        if item.rollno == rollNo:
+            student = st_list[counter]
+            student.rollno = stdObj.rollno
+            student.firstname = stdObj.firstname
+            student.lastname = stdObj.lastname
+            student.fathername = stdObj.fathername
+            student.email = stdObj.email
+            student.dob = stdObj.dob
+        counter += 1
+
+
+def user_detail_for_update():
+    rollno = str(input('enter rollno: '))
+    firstname = str(input('enter firstname: '))
+    lastname = str(input('enter lastname: '))
+    fathername = str(input('enter fathername: '))
+    dob = str(input('enter dob: '))
+    email = str(input('enter email: '))
+    iserror = False
+
+    if len(rollno) > 8:
+        print('invalid rollno character more than 8')
+        iserror = True
+
+    if len(firstname) > 50:
+        print('invalid firstname ')
+        iserror = True
+
+    if len(lastname) > 50:
+        print('invalid lastname')
+        iserror = True
+
+    if len(fathername) > 100:
+        print('invalid fathername')
+        iserror = True
+
+    if len(dob) > 8:
+        print('invalid dob character more than 8 digit')
+        iserror = True
+
+    if len(email) > 250:
+        print('invalid email')
+        iserror = True
+
+    if iserror == False:
+        return student(rollno, firstname, lastname, fathername, dob, email)
 
 
 if __name__ == '__main__':
@@ -214,6 +266,13 @@ if __name__ == '__main__':
                 print('father name', Key)
                 for item in lib1[Key]:
                     print('student first name', item.firstname)
+
+        elif x == '11':
+            x = input("please enter roll number")
+            search_by_rollno(x)
+            studObj = user_detail_for_update()
+            update_user_by_roll(x,studObj)
+            search_by_rollno(x)
 
         else:
             print('Wrong Entry Please enter within limit')
