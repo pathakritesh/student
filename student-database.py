@@ -1,3 +1,7 @@
+import yaml
+import json
+
+
 class student:
     def __init__(self, rollno, firstname, lastname, fathername, dob, email):
         self.rollno = rollno
@@ -211,6 +215,8 @@ if __name__ == '__main__':
             9. sort student by roll number
             10. find brother if they in same collage 
             11. update user information by roll number 
+            12. Store Data YAML in Format
+            13. Store  and show Data in Json Format
 
             Enter Number to Get Details: """))
 
@@ -273,6 +279,32 @@ if __name__ == '__main__':
             studObj = user_detail_for_update()
             update_user_by_roll(x,studObj)
             search_by_rollno(x)
+
+        elif x == '12':
+            with open(r'student_file.yaml','w') as file:
+                documents = yaml.dump(st_list, file)
+            print('Your Data Has Been Stored to YAML Format Successfully')
+
+        elif x == '13':
+            # student database
+            def encode_student(x):
+                if isinstance(x, student):
+                    return x.rollno, x.firstname, x.lastname, x.fathername, x.dob, x.email
+                else:
+                    raise TypeError('Complex object type is not Json serializable')
+
+            def decode_student(dct):
+                if '_student_' in dct:
+                    return student(dct['rollno'], dct['firstname'], dct['lastname'], dct['fathername'], dct['dob'],
+                                   dct['email'])
+                return dct
+
+            c = st_list
+            f = open('student_data', 'w+')
+            json.dump(c, f, default=encode_student)
+            f.seek(0)
+            inc = json.load(f, object_hook=decode_student)
+            print(inc)
 
         else:
             print('Wrong Entry Please enter within limit')
